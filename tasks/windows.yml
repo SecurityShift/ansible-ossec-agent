@@ -1,0 +1,10 @@
+---
+
+- name: Install ossec-client
+  win_chocolatey:
+    name: ossec-client
+    state: present
+  tags:
+    - ossec
+
+
