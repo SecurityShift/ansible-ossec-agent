@@ -11,7 +11,4 @@ ossec_init_name: ossec-hids
 ossec_agent_rhn_channels:
   - ossec-el7-x86_64
 
-ossec_agent_rhn_gpg_keys:
-  - atomicorp
-
 ossec_agent_reconfigure: False
