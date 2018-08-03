@@ -12,3 +12,4 @@ ossec_agent_rhn_channels:
   - ossec-el7-x86_64
 
 ossec_agent_reconfigure: False
+ossec_host_group: ossec

@@ -30,6 +30,15 @@
   tags:
     - config
 
+- name: Selinux file context on log file
+  sefcontext:
+    target: '/var/ossec/logs(/.*)?'
+    setype: var_log_t
+    state: present
+  notify: restorecon ossec logs
+  tags:
+    - selinux
+
 - name: "remove client.keys"
   file:
     path: /var/ossec/etc/client.keys
