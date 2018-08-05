@@ -6,6 +6,7 @@
     name: "{{ ossec_init_name }}"
     state: restarted
     enabled: yes
+  when: no_restart is not defined and not no_restart
 
 - name: restorecon ossec logs
   command: /sbin/restorecon -R /var/ossec/logs
