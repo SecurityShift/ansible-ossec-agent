@@ -85,8 +85,19 @@
     - not ossec_managed_server and not check_keys.stat.exists or ossec_server_name|default("") == ""
     - ossec_server_ping.rc == 0
 
+- name: "Write ossec-authd auth file"
+  copy:
+    content: '{{ ossec_authd_password }}'
+    dest: /var/ossec/etc/authd.pass
+    owner: ossec
+    group: ossec
+    mode: 0600
+  tags:
+    - config
+    - auth
+
 - name: "register client"
-  shell: "/var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515 -A '{{ ossec_agent_name|default(inventory_hostname) }}'"
+  shell: "/var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515 -A '{{ ossec_agent_name|default(inventory_hostname) }}' -P /var/ossec/etc/authd.pass"
   args:
     creates: /var/ossec/etc/client.keys
   when:
